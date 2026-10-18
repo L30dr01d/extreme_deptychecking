@@ -1,0 +1,15 @@
+[custom.all.common]
+type = "local"
+path = "../common"
+ipkg = "common.ipkg"
+
+[custom.all.unique_index]
+type = "local"
+path = "."
+ipkg = "unique_index.ipkg"
+test = "test/test.ipkg"
+
+[custom.all.unique_index-test]
+type = "local"
+path = "test"
+ipkg = "test.ipkg"

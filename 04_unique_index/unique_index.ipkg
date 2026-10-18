@@ -1,0 +1,19 @@
+package unique_index
+version = 0.1.0
+authors = "L3odr0id"
+
+depends = common
+        , deptycheck
+        , getopts
+        , prettier
+
+modules = UniqueIndex
+        , UniqueNames
+        , UniqueNames.Derived
+        , Printers
+        , UniqueIndex.Derived
+
+
+main = Main
+executable = "unique_index"
+sourcedir = "src"
