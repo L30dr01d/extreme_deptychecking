@@ -1,4 +1,6 @@
 build
+/site/
 results/*.json
 .DS_Store
 __pycache__
+.worktrees/

@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+### This script should be POSIX-shell compliant ###
+
+command -v python3 >/dev/null 2>&1 || exit 1
+
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+repo_root=$(CDPATH= cd -- "$script_dir/../../.." && pwd)
+DOCSDIR=${DOCSDIR:-"$repo_root/docs"}
+DOCSDIR=${DOCSDIR%/}
+
+find "$DOCSDIR" -type f -name '*.md' -print | sort | while read -r r; do
+  case "$r" in
+    *superpowers*) continue ;;
+  esac
+  grep -q -e '```idris' -e '<!-- idris' "$r" || continue
+  rel=${r#"$DOCSDIR"/}
+  echo "$rel" | python3 -c "import re; p=input(); p=p[:-3] if p.endswith('.md') else p; p=re.sub(r'(^|/)[0-9]+_', r'\\1', p); print(re.sub(r'(^|/|[_-])(.)', lambda m: ('' if m[1] in '_-' else m[1])+m[2].upper(), p).replace('/', '.'))"
+done | sort

@@ -16,18 +16,22 @@ defaults:
     shell: bash
 
 jobs:
-  readme-typecheck:
-    name: Typecheck README Idris snippets
+  docs-typecheck:
+    name: Typecheck docs Idris snippets
     runs-on: ubuntu-latest
     container: ghcr.io/stefan-hoeck/idris2-pack:latest
     steps:
       - uses: actions/checkout@v7
 
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.x"
+
       - run: pack update-db
 
       - run: pack switch latest
 
-      - name: Typecheck Idris code blocks in README
+      - name: Typecheck Idris code blocks in docs
         run: ./tests/docs/typecheck/run
 
   benchmarks:

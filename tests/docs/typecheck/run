@@ -1,24 +1,53 @@
 #!/usr/bin/env sh
 
 # COPIED from https://github.com/buzden/deptycheck/blob/660a23e6da286359af6edad09b5d441a39a4f8c5/tests/docs/typecheck/run
+# Walks docs/ via ./discover and symlinks each Idris-bearing file into src/.
 
 cd "$(dirname "$0")" || exit 1
+script_dir=$(pwd)
 
 # Pre-cleanup
 rm -rf build src docs.ipkg
 
-mkdir -p src
-ln -s ../../../../README.md src/Readme.md
+repo_root=$(CDPATH= cd -- "$script_dir/../../.." && pwd)
+DOCSDIR=${DOCSDIR:-"$repo_root/docs"}
+DOCSDIR=${DOCSDIR%/}
+export DOCSDIR
 
-echo "
-package docs
-modules = Readme
-depends = deptycheck
-sourcedir = \"src\"
-" > docs.ipkg
+modules=$(./discover) || exit 1
+
+if [ -z "$modules" ]; then
+  rm -rf build src docs.ipkg
+  exit 0
+fi
+
+mkdir -p src
+
+find "$DOCSDIR" -type f -name '*.md' -print | sort | while read -r r; do
+  case "$r" in
+    *superpowers*) continue ;;
+  esac
+  grep -q -e '```idris' -e '<!-- idris' "$r" || continue
+  rel=${r#"$DOCSDIR"/}
+  name=$(echo "$rel" | python3 -c "import re; p=input(); p=p[:-3] if p.endswith('.md') else p; p=re.sub(r'(^|/)[0-9]+_', r'\\1', p); print(re.sub(r'(^|/|[_-])(.)', lambda m: ('' if m[1] in '_-' else m[1])+m[2].upper(), p).replace('/', '.'))")
+  dest=$(echo "$name" | python3 -c "print('src/' + input().replace('.', '/') + '.md')")
+  mkdir -p "$(dirname "$dest")"
+  ln -s "$r" "$dest"
+done
+
+module_csv=$(printf '%s\n' "$modules" | awk 'BEGIN{ORS=""} {print (NR>1?", ":"") $0}')
+
+printf '%s\n' \
+  "package docs" \
+  "modules = $module_csv" \
+  "depends = deptycheck" \
+  'sourcedir = "src"' \
+  > docs.ipkg
 
 pack -q install-deps docs.ipkg &&
 idris2 --build docs.ipkg
+status=$?
 
 # Post-cleanup
 rm -rf build src docs.ipkg
+exit "$status"

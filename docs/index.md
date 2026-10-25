@@ -1,0 +1,1 @@
+# Rules of Extreme DepTyChecking

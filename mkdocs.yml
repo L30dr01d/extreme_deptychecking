@@ -1,0 +1,22 @@
+site_name: Extreme DepTyChecking
+site_url: https://l3odr0id.github.io/extreme_deptychecking/
+repo_url: https://github.com/L3odr0id/extreme_deptychecking
+theme:
+  name: material
+exclude_docs: |
+  superpowers/
+  requirements.txt
+plugins:
+  - search
+  - redirects:
+      redirect_maps:
+        index.md: rules_of_extreme_deptychecking.md
+nav:
+  - Rules of Extreme DepTyChecking: rules_of_extreme_deptychecking.md
+  - Debugging tips: debugging-tips.md
+  - Patterns:
+      - '`00_safe_select` — shrink the choice set before picking': patterns/00_safe_select.md
+      - '`01_second_fuel` — a `Nat` used like extra fuel': patterns/01_second_fuel.md
+      - '`02_helper_type` — use an additional utility type': patterns/02_helper_type.md
+      - '`03_constructive_predicate` — place predicate before `Fin` using only dependent types': patterns/03_constructive_predicate.md
+      - '`04_unique_index` — postpone unique values generation': patterns/04_unique_index.md
