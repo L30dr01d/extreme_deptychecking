@@ -20,3 +20,5 @@ nav:
       - '`02_helper_type` — use an additional utility type': patterns/02_helper_type.md
       - '`03_constructive_predicate` — place predicate before `Fin` using only dependent types': patterns/03_constructive_predicate.md
       - '`04_unique_index` — postpone unique values generation': patterns/04_unique_index.md
+  - Examples:
+      - 00 basic specification template: examples/00_basic_specification_template.md

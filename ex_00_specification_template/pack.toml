@@ -1,0 +1,22 @@
+################
+### Settings ###
+################
+
+[install]
+whitelist = [ "sample-model" ]
+
+#################
+### The model ###
+#################
+
+[custom.all.sample-model]
+type = "local"
+path = "."
+ipkg = "sample-model.ipkg"
+test = "tests/tests.ipkg"
+
+[custom.all.deptycheck]
+type   = "git"
+url    = "https://github.com/buzden/deptycheck"
+commit = "58eb732e82a401c987a57dbe17cde459ee38836e"
+ipkg   = "deptycheck.ipkg"

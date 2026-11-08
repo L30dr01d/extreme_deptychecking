@@ -1,0 +1,8 @@
+build/
+.build/
+**/tests/**/failures
+**/tests/**/output
+
+.DS_Store
+.vscode
+__pycache__

@@ -62,7 +62,7 @@ def test_repo_docs_list_the_five_pattern_modules(discover):
 def test_readme_is_front_door_without_pattern_bodies():
     text = README.read_text()
     assert "data BoolPredResult" not in text
-    assert "https://l3odr0id.github.io/extreme_deptychecking/rules_of_extreme_deptychecking/" in text
+    assert "https://l3odr0id.github.io/extreme_deptychecking/" in text
 
 
 def test_discover_fails_when_python3_missing(tmp_path):

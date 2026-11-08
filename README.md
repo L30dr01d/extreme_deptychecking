@@ -6,17 +6,9 @@ how fast DepTyCheck can **derive** a generator, and how fast that generator can 
 
 This repository presents design patterns representing these trade-offs,
 featuring minimal examples, benchmarks, and some practical rules and debugging tips.
+Also there are some examples of specification development details.
 
-## Contents
-
-- [Rules of Extreme DepTyChecking](https://l3odr0id.github.io/extreme_deptychecking/rules_of_extreme_deptychecking/)
-- [Debugging tips](https://l3odr0id.github.io/extreme_deptychecking/debugging-tips/)
-- Patterns
-  - [00_safe_select — shrink the choice set before picking](https://l3odr0id.github.io/extreme_deptychecking/patterns/00_safe_select/)
-  - [01_second_fuel — a `Nat` used like extra fuel](https://l3odr0id.github.io/extreme_deptychecking/patterns/01_second_fuel/)
-  - [02_helper_type — use an additional utility type](https://l3odr0id.github.io/extreme_deptychecking/patterns/02_helper_type/)
-  - [03_constructive_predicate — place predicate before `Fin` using only dependent types](https://l3odr0id.github.io/extreme_deptychecking/patterns/03_constructive_predicate/)
-  - [04_unique_index — postpone unique values generation](https://l3odr0id.github.io/extreme_deptychecking/patterns/04_unique_index/)
+[https://l3odr0id.github.io/extreme_deptychecking/](https://l3odr0id.github.io/extreme_deptychecking/)
 
 ## Notes
 

@@ -1,0 +1,26 @@
+package sample-model
+brief = ""
+
+license = "Apache-2.0"
+
+sourcedir = "src"
+
+version = 0.1.0
+langversion >= 0.7.0
+
+executable = sample-model
+main = Runner
+
+prebuild = "sh .derive-in-parallel"
+
+depends = collection-utils
+        , deptycheck >= 0.0.250305
+        , getopts
+        , i-hate-parens
+        , prettier
+        , fin-lizzie
+
+modules = Test.Common.Utils
+        , Test.Sample.Things
+        , Test.Sample.Things.Derived
+        , Test.Sample.Pretty
